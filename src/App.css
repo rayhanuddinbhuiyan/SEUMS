@@ -1,0 +1,5 @@
+/* ── App shell — let it fill the screen ── */
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
