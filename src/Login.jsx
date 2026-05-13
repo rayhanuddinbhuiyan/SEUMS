@@ -18,8 +18,8 @@ const Login = () => {
                 <div style={styles.header}>
                     <h1 style={styles.headerTitle}>Login for all</h1>
                 </div>
-
-                {/* ── Status bar ─────────────────────────── */}
+{/* hello world */}
+                {/* ── Status bar ─────────────────────────── */} 
                 <div style={styles.statusBar}>
                     <span style={styles.statusTime}>9:41</span>
                     <span style={styles.statusIcons}>▪▪▪ ≋ 🔋</span>
