@@ -22,6 +22,7 @@ const Login = () => {
                 {/* ── Status bar ─────────────────────────── */} 
                 <div style={styles.statusBar}>
                     <span style={styles.statusTime}>9:41</span>
+                    <span style={styles.statusTime}>9:41</span>
                     <span style={styles.statusIcons}>▪▪▪ ≋ 🔋</span>
                 </div>
 
