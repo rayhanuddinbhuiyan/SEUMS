@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import StudentDashboard from './pages/StudentDashboard'
+import TeacherDashboard from './pages/TeacherDashboard'
 
 function App() {
   // currentPage: 'login' | 'register' | 'student' | 'teacher' | 'coordinator' | 'admin'
@@ -24,8 +25,17 @@ function App() {
       onLogout={() => setCurrentPage('login')}
     />
 
+  if (currentPage === 'teacher')
+    return <TeacherDashboard
+      enrollment={userData.enrollment}
+      fullName={userData.fullName}
+      email={userData.email}
+      department={userData.department}
+      onLogout={() => setCurrentPage('login')}
+    />
+
   // Placeholder for roles that don't have a dedicated dashboard yet
-  if (['teacher', 'coordinator', 'admin'].includes(currentPage))
+  if (['coordinator', 'admin'].includes(currentPage))
     return (
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#f4f6f9', fontFamily: 'inherit' }}>
         <div style={{ background: '#fff', borderRadius: 16, padding: '48px 40px', boxShadow: '0 4px 24px rgba(26,46,90,0.10)', textAlign: 'center', maxWidth: 400 }}>

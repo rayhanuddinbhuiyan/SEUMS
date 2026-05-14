@@ -108,17 +108,17 @@ const Login = ({ onLogin, onNavigateRegister }) => {
                                 </span>
                                 <input
                                     type="text"
-                                    placeholder="e.g. 2023100010030"
+                                    placeholder="e.g. 2023100010030 or T-101"
                                     value={enrollment}
-                                    maxLength={13}
+                                    maxLength={20}
                                     onChange={(e) => {
                                         setError("");
-                                        setEnrollment(e.target.value.replace(/\D/g, ""));
+                                        setEnrollment(e.target.value);
                                     }}
                                     required
                                 />
                                 {enrollment.length > 0 && (
-                                    <span className="char-count">{enrollment.length}/13</span>
+                                    <span className="char-count">{enrollment.length} chars</span>
                                 )}
                             </div>
                         </div>

@@ -1,0 +1,379 @@
+/* ═══════════════════════════════════════════════
+   Teacher Dashboard — Responsive Styles
+   Matches the SEUManage design system (navy + white)
+═══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+.td-page {
+    min-height: 100vh;
+    background: #f0f2f8;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+/* ── Top App Bar ─────────────────────────────── */
+.td-topbar {
+    background: #1a2e5a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px clamp(16px, 3vw, 32px);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+.td-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.td-topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.td-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.td-campus {
+    color: #fff;
+    font-size: clamp(14px, 1.5vw, 17px);
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.td-bell {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+.td-bell:hover { background: rgba(255,255,255,0.15); }
+
+.td-role-badge {
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* ── Teacher Info Strip ──────────────────────── */
+.td-info-strip {
+    background: linear-gradient(135deg, #1a2e5a 0%, #243f7a 100%);
+    color: #fff;
+    padding: 20px clamp(16px, 3vw, 32px) 22px;
+}
+
+.td-profile-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.td-profile-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    border: 2px solid rgba(255,255,255,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.td-profile-text { flex: 1; }
+
+.td-full-name {
+    font-size: clamp(15px, 1.8vw, 19px);
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    margin-bottom: 2px;
+}
+
+.td-designation {
+    font-size: clamp(11px, 1.1vw, 13px);
+    opacity: 0.80;
+    font-weight: 500;
+    margin-bottom: 3px;
+    color: #b8c8e8;
+}
+
+.td-email {
+    font-size: clamp(10px, 1vw, 12px);
+    opacity: 0.65;
+}
+
+/* Meta row */
+.td-meta {
+    display: flex;
+    gap: clamp(16px, 3vw, 48px);
+    flex-wrap: wrap;
+}
+
+.td-meta span {
+    font-size: clamp(10px, 1.1vw, 13px);
+    opacity: 0.90;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.td-meta strong {
+    display: block;
+    font-size: clamp(9px, 0.9vw, 11px);
+    opacity: 0.60;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* ── Quick Stats Bar ─────────────────────────── */
+.td-stats-bar {
+    display: flex;
+    background: #fff;
+    border-bottom: 1px solid #e8ecf4;
+    box-shadow: 0 2px 8px rgba(26,46,90,0.06);
+}
+
+.td-stat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 8px;
+    border-right: 1px solid #e8ecf4;
+    transition: background 0.18s;
+    cursor: default;
+}
+.td-stat:last-child { border-right: none; }
+.td-stat:hover { background: #f5f7fc; }
+
+.td-stat-value {
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 800;
+    color: #1a2e5a;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.td-stat-label {
+    font-size: clamp(9px, 0.9vw, 11px);
+    color: #888;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    text-align: center;
+}
+
+/* ── Main Content ────────────────────────────── */
+.td-main {
+    flex: 1;
+    padding: clamp(16px, 2.5vw, 28px) clamp(16px, 3vw, 32px);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.td-section-title {
+    font-size: clamp(13px, 1.2vw, 15px);
+    font-weight: 700;
+    color: #1a2e5a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    padding-left: 10px;
+    border-left: 3px solid #1a2e5a;
+}
+
+/* ── Feature Grid ────────────────────────────── */
+.td-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(10px, 2vw, 18px);
+}
+
+.td-card {
+    position: relative;
+    background: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: clamp(14px, 2vw, 22px) clamp(8px, 1.5vw, 14px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(26, 46, 90, 0.07);
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    text-align: center;
+}
+
+.td-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(26, 46, 90, 0.13);
+    background: #f5f7fc;
+}
+
+.td-card:active { transform: scale(0.97); }
+
+.td-card-active {
+    background: #eef1fb;
+    box-shadow: 0 4px 16px rgba(26,46,90,0.15);
+    transform: translateY(-2px);
+}
+
+/* Notification badge on card */
+.td-badge {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: #e53e3e;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 20px;
+    line-height: 1.5;
+    letter-spacing: 0.2px;
+}
+
+.td-card-icon {
+    font-size: clamp(22px, 3vw, 34px);
+    line-height: 1;
+    width: clamp(44px, 5.5vw, 58px);
+    height: clamp(44px, 5.5vw, 58px);
+    background: #eef1f8;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.td-card-label {
+    font-size: clamp(10px, 1vw, 12px);
+    color: #1a2e5a;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* ── Recent Activity ─────────────────────────── */
+.td-activity {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(26,46,90,0.07);
+    overflow: hidden;
+}
+
+.td-activity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 18px;
+    border-bottom: 1px solid #f0f2f8;
+    transition: background 0.15s;
+}
+.td-activity-item:last-child { border-bottom: none; }
+.td-activity-item:hover { background: #f8f9fd; }
+
+/* Coloured left dot */
+.td-activity-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+}
+.td-activity-success .td-activity-dot { background: #38a169; }
+.td-activity-info    .td-activity-dot { background: #3182ce; }
+.td-activity-warn    .td-activity-dot { background: #e53e3e; }
+
+.td-activity-body { flex: 1; }
+
+.td-activity-text {
+    font-size: clamp(12px, 1.1vw, 13px);
+    color: #2d3748;
+    font-weight: 500;
+    margin-bottom: 3px;
+    line-height: 1.4;
+}
+
+.td-activity-time {
+    font-size: clamp(10px, 0.9vw, 11px);
+    color: #aaa;
+    font-weight: 500;
+}
+
+/* ── Footer ──────────────────────────────────── */
+.td-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px clamp(16px, 3vw, 32px);
+    background: #fff;
+    border-top: 1px solid #e8ecf4;
+    font-size: 11px;
+    color: #aaa;
+}
+
+.td-logout {
+    background: transparent;
+    border: 1.5px solid #e53e3e;
+    color: #e53e3e;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    font-family: inherit;
+}
+.td-logout:hover { background: #e53e3e; color: #fff; }
+
+/* ── Responsive ──────────────────────────────── */
+
+/* Large desktop: keep 4-col grid */
+@media (min-width: 1200px) {
+    .td-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Tablet: 3-col grid */
+@media (max-width: 900px) {
+    .td-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Mobile: 2-col grid */
+@media (max-width: 600px) {
+    .td-grid { grid-template-columns: repeat(2, 1fr); }
+    .td-meta  { gap: 12px; }
+    .td-stats-bar { flex-wrap: wrap; }
+    .td-stat  { min-width: 50%; border-bottom: 1px solid #e8ecf4; }
+}
+
+/* Very small screen */
+@media (max-width: 360px) {
+    .td-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+}
