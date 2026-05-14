@@ -1,73 +1,66 @@
-import './App.css'
-import { useState } from 'react'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import StudentDashboard from './pages/StudentDashboard'
-import TeacherDashboard from './pages/TeacherDashboard'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import './App.css';
 
-function App() {
-  // currentPage: 'login' | 'register' | 'student' | 'teacher' | 'coordinator' | 'admin'
-  const [currentPage, setCurrentPage] = useState('login')
-  const [userData, setUserData] = useState({})
+// Auth
+import Login        from './pages/auth/Login';
+import Register     from './pages/auth/Register';
 
-  // Called by both Login and Register after successful auth
-  const handleAuth = (role, data = {}) => {
-    setUserData(data)
-    setCurrentPage(role) // role === 'student' | 'teacher' | etc.
-  }
+// Student
+import StudentDashboard from './pages/student/StudentDashboard';
+import TodaysLecture    from './pages/student/TodaysLecture';
+import Attendance       from './pages/student/Attendance';
+import Syllabus         from './pages/student/Syllabus';
+import Timetable        from './pages/student/Timetable';
+import Faculties        from './pages/student/Faculties';
+import Exams            from './pages/student/Exams';
+import Results          from './pages/student/Results';
+import Fees             from './pages/student/Fees';
+import AttendRequest    from './pages/student/AttendRequest';
+import DownloadIDCard   from './pages/student/DownloadIDCard';
 
-  if (currentPage === 'student')
-    return <StudentDashboard
-      enrollment={userData.enrollment}
-      fullName={userData.fullName}
-      email={userData.email}
-      department={userData.department}
-      onLogout={() => setCurrentPage('login')}
-    />
+// Teacher
+import TeacherDashboard from './pages/teacher/TeacherDashboard';
 
-  if (currentPage === 'teacher')
-    return <TeacherDashboard
-      enrollment={userData.enrollment}
-      fullName={userData.fullName}
-      email={userData.email}
-      department={userData.department}
-      onLogout={() => setCurrentPage('login')}
-    />
-
-  // Placeholder for roles that don't have a dedicated dashboard yet
-  if (['coordinator', 'admin'].includes(currentPage))
-    return (
-      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#f4f6f9', fontFamily: 'inherit' }}>
-        <div style={{ background: '#fff', borderRadius: 16, padding: '48px 40px', boxShadow: '0 4px 24px rgba(26,46,90,0.10)', textAlign: 'center', maxWidth: 400 }}>
-          <div style={{ width: 72, height: 72, borderRadius: '50%', background: '#eef1f8', border: '3px solid #c8d0e0', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a2e5a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-              <path d="M6 12v5c3.27 1.82 8.73 1.82 12 0v-5" />
-            </svg>
-          </div>
-          <h2 style={{ color: '#1a2e5a', fontSize: 22, fontWeight: 800, marginBottom: 8 }}>
-            Welcome, {userData.fullName || currentPage.charAt(0).toUpperCase() + currentPage.slice(1)}!
-          </h2>
-          <p style={{ color: '#777', fontSize: 14, marginBottom: 6 }}>Role: <strong style={{ color: '#1a2e5a' }}>{currentPage.charAt(0).toUpperCase() + currentPage.slice(1)}</strong></p>
-          {userData.department && <p style={{ color: '#777', fontSize: 14, marginBottom: 24 }}>Department: <strong style={{ color: '#1a2e5a' }}>{userData.department}</strong></p>}
-          <p style={{ color: '#aaa', fontSize: 13, marginBottom: 28 }}>
-            Your dashboard is coming soon. Stay tuned!
-          </p>
-          <button
-            onClick={() => setCurrentPage('login')}
-            style={{ background: '#1a2e5a', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 28px', fontWeight: 700, fontSize: 15, cursor: 'pointer' }}
-          >
-            Logout
-          </button>
-        </div>
-      </div>
-    )
-
-  if (currentPage === 'register')
-    return <Register onNavigateLogin={() => setCurrentPage('login')} onRegister={handleAuth} />
-
-  return <Login onLogin={handleAuth} onNavigateRegister={() => setCurrentPage('register')} />
+// Simple protected route — redirects to /login if no session
+function Protected({ children, role }) {
+    const user = JSON.parse(localStorage.getItem("seu_current_user") || "null");
+    if (!user) return <Navigate to="/login" replace />;
+    if (role && user.role !== role) return <Navigate to="/login" replace />;
+    return children;
 }
 
-export default App
+function App() {
+    return (
+        <BrowserRouter>
+            <Routes>
+                {/* Default */}
+                <Route path="/" element={<Navigate to="/login" replace />} />
 
+                {/* Auth */}
+                <Route path="/login"    element={<Login />} />
+                <Route path="/register" element={<Register />} />
+
+                {/* Student routes */}
+                <Route path="/student-dashboard"   element={<Protected role="student"><StudentDashboard /></Protected>} />
+                <Route path="/student/lecture"     element={<Protected role="student"><TodaysLecture /></Protected>} />
+                <Route path="/student/attendance"  element={<Protected role="student"><Attendance /></Protected>} />
+                <Route path="/student/syllabus"    element={<Protected role="student"><Syllabus /></Protected>} />
+                <Route path="/student/timetable"   element={<Protected role="student"><Timetable /></Protected>} />
+                <Route path="/student/faculties"   element={<Protected role="student"><Faculties /></Protected>} />
+                <Route path="/student/exams"       element={<Protected role="student"><Exams /></Protected>} />
+                <Route path="/student/results"     element={<Protected role="student"><Results /></Protected>} />
+                <Route path="/student/fees"        element={<Protected role="student"><Fees /></Protected>} />
+                <Route path="/student/request"     element={<Protected role="student"><AttendRequest /></Protected>} />
+                <Route path="/student/id-card"     element={<Protected role="student"><DownloadIDCard /></Protected>} />
+
+                {/* Teacher routes */}
+                <Route path="/teacher-dashboard"   element={<Protected role="teacher"><TeacherDashboard /></Protected>} />
+
+                {/* Catch-all */}
+                <Route path="*" element={<Navigate to="/login" replace />} />
+            </Routes>
+        </BrowserRouter>
+    );
+}
+
+export default App;

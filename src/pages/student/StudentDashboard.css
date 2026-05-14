@@ -221,3 +221,33 @@
         padding: 12px;
     }
 }
+
+/* ── Welcome Banner ──────────────────────────── */
+.sd-welcome-banner {
+    background: linear-gradient(135deg, #e8f4fd 0%, #eef6ff 100%);
+    border-left: 4px solid #1a2e5a;
+    padding: 14px clamp(16px, 3vw, 32px);
+    border-bottom: 1px solid #d4e6f5;
+}
+
+.sd-welcome-back {
+    font-size: clamp(11px, 1vw, 13px);
+    font-weight: 700;
+    color: #1a2e5a;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin: 0 0 4px;
+    opacity: 0.75;
+}
+
+.sd-welcome-msg {
+    font-size: clamp(13px, 1.3vw, 15px);
+    color: #2d3748;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.sd-welcome-msg strong {
+    color: #1a2e5a;
+    font-weight: 800;
+}

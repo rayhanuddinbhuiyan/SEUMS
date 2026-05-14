@@ -1,21 +1,22 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./StudentDashboard.css";
 
-// Feature menu cards — matches the Figma design grid
+// Feature menu cards with their routes
 const menuItems = [
-    { icon: "📋", label: "Today's Lecture" },
-    { icon: "📊", label: "Attendance Inc." },
-    { icon: "📚", label: "Syllabus" },
-    { icon: "🗓️", label: "Time table" },
-    { icon: "👨‍🏫", label: "Faculties" },
-    { icon: "📝", label: "Exams" },
-    { icon: "📈", label: "Results" },
-    { icon: "💳", label: "Fees" },
-    { icon: "✅", label: "Attendance" },
-    { icon: "📨", label: "Attend. request" },
-    { icon: "🪪", label: "Download ID-Card" },
+    { icon: "📋", label: "Today's Lecture",  route: "/student/lecture" },
+    { icon: "📊", label: "Attendance Inc.",  route: "/student/attendance" },
+    { icon: "📚", label: "Syllabus",         route: "/student/syllabus" },
+    { icon: "🗓️", label: "Time table",      route: "/student/timetable" },
+    { icon: "👨‍🏫", label: "Faculties",      route: "/student/faculties" },
+    { icon: "📝", label: "Exams",            route: "/student/exams" },
+    { icon: "📈", label: "Results",          route: "/student/results" },
+    { icon: "💳", label: "Fees",             route: "/student/fees" },
+    { icon: "✅", label: "Attendance",       route: "/student/attendance" },
+    { icon: "📨", label: "Attend. request",  route: "/student/request" },
+    { icon: "🪪", label: "Download ID-Card", route: "/student/id-card" },
 ];
 
-// Roll number → Student name mapping (01–99)
 const ROLL_NAMES = {
     1: "Arif Hossain", 2: "Nadia Sultana", 3: "Karim Molla",
     4: "Sumi Akter", 5: "Rafiq Ahmed", 6: "Puja Saha",
@@ -52,31 +53,34 @@ const ROLL_NAMES = {
     97: "Torikul Islam", 98: "Marium Begum", 99: "Anisur Rahman",
 };
 
-// Derive student info from enrollment ID, with optional overrides from registration
-const getStudentInfo = (enrollment = "2023100010001", overrides = {}) => {
+const getStudentInfo = (user = {}) => {
+    const enrollment = user.enrollment || "2023100010001";
     const roll = parseInt(enrollment.slice(11), 10);
-    const name = overrides.fullName || ROLL_NAMES[roll] || `Student ${roll.toString().padStart(2, "0")}`;
-
-    // Extract batch year from enrollment (digits 0-3) and convert to batch number
+    const name = user.fullName || ROLL_NAMES[roll] || `Student ${String(roll).padStart(2, "0")}`;
     const admissionYear = parseInt(enrollment.slice(0, 4), 10);
-    const batchYear = admissionYear - 2000; // e.g. 2023 → 23
-
-    // Extract semester from enrollment digits 7-9 (e.g. "001" → semester 1)
+    const batchYear = admissionYear - 2000;
     const sem = parseInt(enrollment.slice(7, 10), 10) || 1;
-
     return {
         rollNo: roll,
         name,
         enrollment,
-        department: overrides.department || "CSE",
+        department: user.department || "CSE",
         batch: batchYear,
         sem,
-        email: overrides.email || `${enrollment}@seu.edu.bd`,
+        email: user.email || `${enrollment}@seu.edu.bd`,
     };
 };
 
-const StudentDashboard = ({ enrollment, fullName, email, department, onLogout }) => {
-    const student = getStudentInfo(enrollment, { fullName, email, department });
+const StudentDashboard = () => {
+    const navigate = useNavigate();
+    // Read session from localStorage (persists on refresh)
+    const raw = JSON.parse(localStorage.getItem("seu_current_user") || "{}");
+    const student = getStudentInfo(raw);
+
+    const handleLogout = () => {
+        localStorage.removeItem("seu_current_user");
+        navigate("/login");
+    };
 
     return (
         <div className="sd-page">
@@ -102,7 +106,7 @@ const StudentDashboard = ({ enrollment, fullName, email, department, onLogout })
                 <p className="sd-enrollment">{student.enrollment}</p>
                 <p className="sd-email">{student.email}</p>
                 <div className="sd-meta">
-                    <span><strong>Department</strong><br />CSE</span>
+                    <span><strong>Department</strong><br />{student.department}</span>
                     <span><strong>Batch</strong><br />{student.batch}</span>
                     <span><strong>Semester</strong><br />{student.sem}</span>
                     <span><strong>Roll No.</strong><br />{student.rollNo}</span>
@@ -112,7 +116,11 @@ const StudentDashboard = ({ enrollment, fullName, email, department, onLogout })
             {/* ── Feature Grid ─────────────────────────── */}
             <div className="sd-grid">
                 {menuItems.map((item) => (
-                    <button key={item.label} className="sd-card">
+                    <button
+                        key={item.label}
+                        className="sd-card"
+                        onClick={() => navigate(item.route)}
+                    >
                         <span className="sd-card-icon">{item.icon}</span>
                         <span className="sd-card-label">{item.label}</span>
                     </button>
@@ -122,7 +130,7 @@ const StudentDashboard = ({ enrollment, fullName, email, department, onLogout })
             {/* ── Footer ───────────────────────────────── */}
             <div className="sd-footer">
                 <span>App Version 5.83</span>
-                <button className="sd-logout" onClick={onLogout}>Logout</button>
+                <button className="sd-logout" onClick={handleLogout}>Logout</button>
             </div>
 
         </div>

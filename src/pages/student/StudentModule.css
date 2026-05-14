@@ -1,0 +1,289 @@
+/* ══════════════════════════════════════════════════
+   Shared Student Module Page Styles
+   Used by: TodaysLecture, Attendance, Syllabus,
+            Timetable, Faculties, Exams, Results,
+            Fees, AttendRequest
+══════════════════════════════════════════════════ */
+
+.smp-page {
+    min-height: 100vh;
+    background: #f0f2f8;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* ── Top Bar ──────────────────────────────────── */
+.smp-topbar {
+    background: #1a2e5a;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px clamp(16px, 3vw, 32px);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+.smp-back-btn {
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.18s;
+    line-height: 1;
+}
+.smp-back-btn:hover { background: rgba(255,255,255,0.28); }
+
+.smp-topbar-title { flex: 1; }
+.smp-topbar-title h1 {
+    font-size: clamp(15px, 1.8vw, 19px);
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 1px;
+    letter-spacing: 0.2px;
+}
+.smp-topbar-title p {
+    font-size: clamp(10px, 1vw, 12px);
+    color: rgba(255,255,255,0.6);
+    margin: 0;
+}
+
+.smp-topbar-icon {
+    font-size: 26px;
+    flex-shrink: 0;
+}
+
+/* ── Content area ─────────────────────────────── */
+.smp-content {
+    flex: 1;
+    padding: clamp(16px, 2.5vw, 28px) clamp(16px, 3vw, 32px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* ── Section card ─────────────────────────────── */
+.smp-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(26,46,90,0.07);
+    overflow: hidden;
+}
+
+.smp-card-header {
+    background: linear-gradient(135deg, #1a2e5a, #243f7a);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.smp-card-header h2 {
+    color: #fff;
+    font-size: clamp(13px, 1.3vw, 15px);
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.smp-card-header span { font-size: 18px; }
+
+.smp-card-body { padding: 0; }
+
+/* ── Table ────────────────────────────────────── */
+.smp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: clamp(12px, 1.1vw, 14px);
+}
+.smp-table th {
+    background: #f5f7fc;
+    color: #1a2e5a;
+    font-weight: 700;
+    padding: 11px 16px;
+    text-align: left;
+    font-size: clamp(11px, 1vw, 12px);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    border-bottom: 2px solid #e8ecf4;
+}
+.smp-table td {
+    padding: 12px 16px;
+    color: #2d3748;
+    border-bottom: 1px solid #f0f2f8;
+    vertical-align: middle;
+}
+.smp-table tr:last-child td { border-bottom: none; }
+.smp-table tr:hover td { background: #f8f9fd; }
+
+/* ── Status badges ────────────────────────────── */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+.badge-green  { background: #c6f6d5; color: #276749; }
+.badge-red    { background: #fed7d7; color: #9b2c2c; }
+.badge-yellow { background: #fefcbf; color: #744210; }
+.badge-blue   { background: #bee3f8; color: #2c5282; }
+.badge-gray   { background: #e2e8f0; color: #4a5568; }
+
+/* ── Progress bar ─────────────────────────────── */
+.smp-progress-wrap {
+    background: #e8ecf4;
+    border-radius: 20px;
+    height: 8px;
+    overflow: hidden;
+    min-width: 80px;
+}
+.smp-progress-bar {
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+}
+.smp-progress-bar.good   { background: #38a169; }
+.smp-progress-bar.warn   { background: #e9a020; }
+.smp-progress-bar.danger { background: #e53e3e; }
+
+/* ── Summary stats row ────────────────────────── */
+.smp-stats-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.smp-stat-box {
+    flex: 1;
+    min-width: 110px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(26,46,90,0.07);
+    text-align: center;
+}
+.smp-stat-box .stat-val {
+    font-size: clamp(22px, 3vw, 28px);
+    font-weight: 800;
+    color: #1a2e5a;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+.smp-stat-box .stat-label {
+    font-size: clamp(10px, 0.9vw, 11px);
+    color: #888;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* ── Form ─────────────────────────────────────── */
+.smp-form { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.smp-form label { font-size: 12px; font-weight: 700; color: #1a2e5a; text-transform: uppercase; letter-spacing: 0.4px; display: block; margin-bottom: 5px; }
+.smp-form select,
+.smp-form textarea,
+.smp-form input[type="text"] {
+    width: 100%; box-sizing: border-box;
+    border: 1.5px solid #dde3ef; border-radius: 10px;
+    padding: 10px 14px; font-size: 14px; color: #1a2e5a;
+    font-family: inherit; background: #fff; outline: none;
+    transition: border-color 0.18s, box-shadow 0.18s;
+}
+.smp-form select:focus,
+.smp-form textarea:focus,
+.smp-form input[type="text"]:focus {
+    border-color: #1a2e5a;
+    box-shadow: 0 0 0 3px rgba(26,46,90,0.10);
+}
+.smp-form textarea { min-height: 90px; resize: vertical; }
+.smp-submit-btn {
+    background: linear-gradient(135deg, #1a2e5a, #243f7a);
+    color: #fff; border: none; border-radius: 10px;
+    padding: 12px; font-size: 14px; font-weight: 700;
+    cursor: pointer; font-family: inherit;
+    transition: opacity 0.18s, transform 0.15s;
+}
+.smp-submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* ── Faculty card grid ────────────────────────── */
+.smp-faculty-grid {
+    padding: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+}
+.smp-faculty-card {
+    background: #f5f7fc;
+    border-radius: 12px;
+    padding: 18px 14px;
+    text-align: center;
+    border: 1px solid #e4eaf5;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.smp-faculty-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(26,46,90,0.10); }
+.smp-faculty-avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: #dde3ef; display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 12px; font-size: 22px;
+    border: 2px solid #c8d4ea;
+}
+.smp-faculty-name { font-size: 14px; font-weight: 700; color: #1a2e5a; margin-bottom: 4px; }
+.smp-faculty-role { font-size: 11px; color: #5a6e8a; margin-bottom: 6px; font-weight: 500; }
+.smp-faculty-dept { font-size: 11px; color: #888; }
+.smp-faculty-email { font-size: 11px; color: #3182ce; margin-top: 6px; word-break: break-all; }
+
+/* ── Timetable grid ───────────────────────────── */
+.smp-timetable { padding: 16px; overflow-x: auto; }
+.smp-tt-grid {
+    display: grid;
+    grid-template-columns: 80px repeat(5, 1fr);
+    gap: 6px;
+    min-width: 560px;
+}
+.smp-tt-cell {
+    background: #f5f7fc;
+    border-radius: 8px;
+    padding: 10px 8px;
+    text-align: center;
+    font-size: clamp(10px, 1vw, 12px);
+}
+.smp-tt-cell.header {
+    background: #1a2e5a;
+    color: #fff;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+.smp-tt-cell.time-col { background: #e4eaf5; color: #1a2e5a; font-weight: 700; font-size: 10px; }
+.smp-tt-cell.has-class { background: #eef1fb; border: 1px solid #c8d4ea; }
+.smp-tt-subject { font-weight: 700; color: #1a2e5a; margin-bottom: 3px; }
+.smp-tt-room { font-size: 10px; color: #888; }
+
+/* ── Empty state ──────────────────────────────── */
+.smp-empty {
+    padding: 40px;
+    text-align: center;
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 600px) {
+    .smp-stats-row { flex-direction: column; }
+    .smp-faculty-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 400px) {
+    .smp-faculty-grid { grid-template-columns: 1fr; }
+}

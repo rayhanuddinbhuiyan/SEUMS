@@ -1,0 +1,251 @@
+/* ═══════════════════════════════════════════
+   ID Card Modal — SEUManage
+═══════════════════════════════════════════ */
+
+/* Overlay */
+.idcm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 20, 50, 0.72);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    animation: idcm-fade-in 0.22s ease;
+}
+
+@keyframes idcm-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Modal box */
+.idcm-modal {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 24px 80px rgba(10, 20, 50, 0.35);
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    animation: idcm-slide-up 0.26s cubic-bezier(.34,1.3,.7,1);
+    overflow: hidden;
+}
+
+@keyframes idcm-slide-up {
+    from { transform: translateY(40px) scale(0.97); opacity: 0; }
+    to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Preview modal is wider to fit the canvas */
+.idcm-preview-wrap ~ .idcm-modal,
+.idcm-modal:has(.idcm-preview-wrap) {
+    max-width: 860px;
+}
+
+/* Close button */
+.idcm-close {
+    position: absolute;
+    top: 14px; right: 16px;
+    background: #f0f2f8;
+    border: none;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+    color: #5a6e8a;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.18s, color 0.18s;
+    z-index: 10;
+}
+.idcm-close:hover { background: #e53e3e; color: #fff; }
+
+/* ── Form Step ─────────────────────────────────────────── */
+.idcm-form-wrap {
+    padding: 36px 40px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.idcm-form-header { text-align: center; }
+
+.idcm-form-icon {
+    font-size: 42px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.idcm-form-header h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1a2e5a;
+    margin-bottom: 6px;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.idcm-form-header p {
+    font-size: 13px;
+    color: #778;
+    line-height: 1.5;
+}
+
+/* Info row showing auto-filled fields */
+.idcm-info-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    background: #f5f7fc;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #3a4e6e;
+}
+.idcm-info-row span strong { color: #1a2e5a; }
+
+/* Field */
+.idcm-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.idcm-field label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1a2e5a;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.idcm-field select,
+.idcm-field input {
+    border: 1.5px solid #dde3ef;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #1a2e5a;
+    font-family: inherit;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.18s, box-shadow 0.18s;
+}
+.idcm-field select:focus,
+.idcm-field input:focus {
+    border-color: #1a2e5a;
+    box-shadow: 0 0 0 3px rgba(26,46,90,0.10);
+}
+
+/* Error */
+.idcm-error {
+    color: #e53e3e;
+    font-size: 12px;
+    font-weight: 600;
+    background: #fff5f5;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 0;
+}
+
+/* Generate button */
+.idcm-generate-btn {
+    background: linear-gradient(135deg, #1a2e5a, #243f7a);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 13px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.18s, transform 0.15s;
+    margin-top: 4px;
+}
+.idcm-generate-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.idcm-generate-btn:active { transform: scale(0.98); }
+
+/* ── Preview Step ──────────────────────────────────────── */
+.idcm-preview-wrap {
+    padding: 28px 32px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.idcm-preview-wrap h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #1a2e5a;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    margin: 0;
+}
+
+.idcm-preview-sub {
+    font-size: 13px;
+    color: #778;
+    margin: 0;
+}
+
+/* Canvas container — scales down on small screens */
+.idcm-canvas-wrap {
+    background: #e8ecf5;
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.idcm-canvas {
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(26,46,90,0.22);
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Action buttons row */
+.idcm-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.idcm-back-btn {
+    background: #f0f2f8;
+    color: #1a2e5a;
+    border: none;
+    border-radius: 10px;
+    padding: 11px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.18s;
+}
+.idcm-back-btn:hover { background: #dde3ef; }
+
+.idcm-download-btn {
+    flex: 1;
+    background: linear-gradient(135deg, #1a8a5a, #1d6b46);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 11px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.18s, transform 0.15s;
+}
+.idcm-download-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .idcm-form-wrap  { padding: 28px 20px 24px; }
+    .idcm-preview-wrap { padding: 20px 16px; }
+    .idcm-canvas-wrap { padding: 10px; }
+    .idcm-info-row { flex-direction: column; gap: 6px; }
+}
