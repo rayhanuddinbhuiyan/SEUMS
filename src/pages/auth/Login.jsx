@@ -153,9 +153,9 @@ const Login = () => {
                         <button type="submit" className="login-btn">Login</button>
                     </form>
 
-                    <div className="enrollment-hint">
+                    {/* <div className="enrollment-hint">
                         <span>💡 Student enrollment: <strong>20231000100</strong> + 01–99</span>
-                    </div>
+                    </div> */}
 
                     <div className="role-tags">
                         <span className="role-tag">Student</span>
