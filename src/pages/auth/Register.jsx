@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import seuLogo from "../../assets/icons/SEU_____________________________logo.png";
+import GalaxyBackground from "./GalaxyBackground";
 import "./Register.css";
 
 const ROLES = ["Student", "Teacher", "Coordinator", "Admin"];
@@ -105,13 +107,11 @@ const Register = () => {
 
     return (
         <div className="reg-page">
+            <GalaxyBackground />
             <div className="glass-card-wide">
                 <div className="reg-brand">
                     <div className="reg-logo">
-                        <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                            <path d="M6 12v5c3.27 1.82 8.73 1.82 12 0v-5" />
-                        </svg>
+                        <img src={seuLogo} alt="SEU Logo" />
                     </div>
                     <h2>Create Account</h2>
                     <p className="tagline">Fill in your details to register</p>

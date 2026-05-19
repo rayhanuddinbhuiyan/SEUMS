@@ -68,15 +68,20 @@
 }
 
 .login-logo {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.1);
+  width: 130px;
+  height: 130px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 16px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.login-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: screen;
 }
 
 .login-logo svg {

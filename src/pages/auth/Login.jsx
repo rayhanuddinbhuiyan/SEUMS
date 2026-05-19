@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import seuLogo from "../../assets/icons/SEU_____________________________logo.png";
+import GalaxyBackground from "./GalaxyBackground";
 import "./Login.css";
 
 const FIXED_PREFIX = "20231000100";
@@ -64,15 +66,13 @@ const Login = () => {
 
     return (
         <div className="login-page">
+            <GalaxyBackground />
             <div className="glass-card">
                 <div className="login-brand">
                     <div className="login-logo">
-                        <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                            <path d="M6 12v5c3.27 1.82 8.73 1.82 12 0v-5" />
-                        </svg>
+                        <img src={seuLogo} alt="SEU Logo" />
                     </div>
-                    <h1>SEUManage</h1>
+                    <h1>SEUMS</h1>
                     <p className="tagline">Sign in to your account</p>
                 </div>
 
