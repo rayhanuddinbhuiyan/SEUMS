@@ -1,19 +1,62 @@
-/* ═══════════════════════════════════════════════
-   Student Dashboard — Responsive Styles
-   Matches the Figma mobile-first design layout
-═══════════════════════════════════════════════ */
+/* Student Dashboard — Glassmorphism Theme */
 
 .sd-page {
     min-height: 100vh;
-    background: #f0f2f8;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
     display: flex;
     flex-direction: column;
     font-family: 'Segoe UI', Arial, sans-serif;
+    position: relative;
+    overflow-x: hidden;
+    color: #fff;
+}
+
+/* Glowing orbs for depth */
+.sd-page::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(99, 102, 241, 0) 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    animation: float 10s ease-in-out infinite alternate;
+}
+
+.sd-page::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    right: -10%;
+    width: 35vw;
+    height: 35vw;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.2) 0%, rgba(236, 72, 153, 0) 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    animation: float 12s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(20px) scale(1.1); }
+}
+
+/* Base Z-index for all content */
+.sd-topbar, .sd-info-strip, .sd-grid, .sd-footer {
+    position: relative;
+    z-index: 10;
 }
 
 /* ── Top App Bar ─────────────────────────────── */
 .sd-topbar {
-    background: #1a2e5a;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -30,7 +73,8 @@
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,6 +85,7 @@
     color: #fff;
     font-size: clamp(14px, 1.5vw, 17px);
     font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .sd-bell {
@@ -48,9 +93,12 @@
     border: none;
     font-size: 20px;
     cursor: pointer;
-    padding: 4px;
+    padding: 6px;
     border-radius: 50%;
     transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .sd-bell:hover {
@@ -59,107 +107,121 @@
 
 /* ── Student Info Strip ──────────────────────── */
 .sd-info-strip {
-    background: #1a2e5a;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     color: #fff;
-    padding: 14px clamp(16px, 3vw, 32px) 20px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    padding: 20px clamp(16px, 3vw, 32px);
 }
 
 .sd-full-name {
-    font-size: clamp(14px, 1.8vw, 18px);
+    font-size: clamp(16px, 2vw, 22px);
     font-weight: 700;
     letter-spacing: 0.5px;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .sd-enrollment {
-    font-size: clamp(11px, 1.2vw, 13px);
-    opacity: 0.80;
+    font-size: clamp(12px, 1.3vw, 14px);
+    opacity: 0.85;
     font-family: monospace;
     letter-spacing: 1px;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 
 .sd-email {
-    font-size: clamp(10px, 1.1vw, 12px);
+    font-size: clamp(11px, 1.1vw, 13px);
     opacity: 0.70;
-    margin-bottom: 14px;
+    margin-bottom: 20px;
 }
 
 .sd-meta {
     display: flex;
-    gap: clamp(16px, 3vw, 40px);
+    gap: clamp(20px, 4vw, 40px);
     flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .sd-meta span {
-    font-size: clamp(10px, 1.1vw, 13px);
-    opacity: 0.90;
+    font-size: clamp(11px, 1.2vw, 14px);
+    opacity: 0.95;
     line-height: 1.6;
     text-align: center;
 }
 
 .sd-meta strong {
     display: block;
-    font-size: clamp(9px, 0.9vw, 11px);
-    opacity: 0.65;
-    font-weight: 600;
+    font-size: clamp(10px, 1vw, 12px);
+    color: #a78bfa;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
 }
 
 /* ── Feature Grid ────────────────────────────── */
 .sd-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: clamp(10px, 2vw, 20px);
-    padding: clamp(16px, 2.5vw, 32px);
+    gap: clamp(12px, 2.5vw, 24px);
+    padding: clamp(20px, 3vw, 40px);
     flex: 1;
 }
 
 .sd-card {
-    background: #fff;
-    border: none;
-    border-radius: 12px;
-    padding: clamp(14px, 2vw, 24px) clamp(8px, 1.5vw, 16px);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: clamp(16px, 2.5vw, 28px) clamp(10px, 1.5vw, 20px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(26, 46, 90, 0.08);
-    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s, border-color 0.2s;
     text-align: center;
+    color: #fff;
 }
 
 .sd-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(26, 46, 90, 0.14);
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 40px 0 rgba(99, 102, 241, 0.3);
 }
 
 .sd-card:active {
-    transform: scale(0.97);
+    transform: scale(0.96);
 }
 
 .sd-card-icon {
-    font-size: clamp(24px, 3.5vw, 36px);
+    font-size: clamp(26px, 3.5vw, 40px);
     line-height: 1;
-    /* icon box */
-    width: clamp(44px, 5.5vw, 60px);
-    height: clamp(44px, 5.5vw, 60px);
-    background: #eef1f8;
-    border-radius: 12px;
+    width: clamp(50px, 6vw, 70px);
+    height: clamp(50px, 6vw, 70px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: inset 0 2px 10px rgba(255, 255, 255, 0.05);
 }
 
 .sd-card-label {
-    font-size: clamp(10px, 1vw, 13px);
-    color: #1a2e5a;
+    font-size: clamp(11px, 1.2vw, 14px);
     font-weight: 600;
     line-height: 1.3;
+    letter-spacing: 0.3px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 /* ── Footer ──────────────────────────────────── */
@@ -167,87 +229,68 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px clamp(16px, 3vw, 32px);
-    background: #fff;
-    border-top: 1px solid #e8ecf4;
-    font-size: 11px;
-    color: #aaa;
+    padding: 12px clamp(16px, 3vw, 32px);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .sd-logout {
     background: transparent;
-    border: 1.5px solid #e53e3e;
-    color: #e53e3e;
+    border: 1.5px solid rgba(239, 68, 68, 0.7);
+    color: #fca5a5;
     font-size: 12px;
-    font-weight: 600;
-    padding: 4px 14px;
+    font-weight: 700;
+    padding: 6px 16px;
     border-radius: 20px;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s;
+    transition: all 0.2s;
 }
 
 .sd-logout:hover {
-    background: #e53e3e;
+    background: rgba(239, 68, 68, 0.2);
     color: #fff;
+    border-color: #ef4444;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
 }
 
 /* ── Responsive ──────────────────────────────── */
 
-/* Large desktop: 4-column grid */
 @media (min-width: 1200px) {
     .sd-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
-/* Tablet: 3-col grid (default) — keep as-is */
-
-/* Mobile: 2-column grid */
 @media (max-width: 600px) {
     .sd-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-
     .sd-meta {
         gap: 12px;
     }
 }
 
-/* Very small screen */
 @media (max-width: 360px) {
     .sd-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
+        gap: 10px;
         padding: 12px;
     }
 }
 
-/* ── Welcome Banner ──────────────────────────── */
-.sd-welcome-banner {
-    background: linear-gradient(135deg, #e8f4fd 0%, #eef6ff 100%);
-    border-left: 4px solid #1a2e5a;
-    padding: 14px clamp(16px, 3vw, 32px);
-    border-bottom: 1px solid #d4e6f5;
+/* Custom Image Icon Styling */
+.sd-icon-img {
+    width: clamp(28px, 4vw, 36px);
+    height: clamp(28px, 4vw, 36px);
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+    transition: transform 0.2s ease;
 }
 
-.sd-welcome-back {
-    font-size: clamp(11px, 1vw, 13px);
-    font-weight: 700;
-    color: #1a2e5a;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    margin: 0 0 4px;
-    opacity: 0.75;
-}
-
-.sd-welcome-msg {
-    font-size: clamp(13px, 1.3vw, 15px);
-    color: #2d3748;
-    margin: 0;
-    line-height: 1.5;
-}
-
-.sd-welcome-msg strong {
-    color: #1a2e5a;
-    font-weight: 800;
+.sd-card:hover .sd-icon-img {
+    transform: scale(1.1) rotate(5deg);
 }

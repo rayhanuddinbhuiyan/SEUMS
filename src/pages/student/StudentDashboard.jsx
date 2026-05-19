@@ -1,20 +1,30 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import presenterIcon from "../../assets/icons/presenter.png";
+import calendarIcon from "../../assets/icons/calendar.png";
+import syllabusIcon from "../../assets/icons/stack-of-books.png";
+import clockIcon from "../../assets/icons/clock.png";
+import teacherIcon from "../../assets/icons/teacher.png";
+import examIcon from "../../assets/icons/exam.png";
+import feesIcon from "../../assets/icons/tuition-fees.png";
+import markIcon from "../../assets/icons/good-mark.png";
+import receptionistIcon from "../../assets/icons/receptionist.gif";
+import idCardIcon from "../../assets/icons/id-card.gif";
 import "./StudentDashboard.css";
 
 // Feature menu cards with their routes
 const menuItems = [
-    { icon: "📋", label: "Today's Lecture",  route: "/student/lecture" },
-    { icon: "📊", label: "Attendance Inc.",  route: "/student/attendance" },
-    { icon: "📚", label: "Syllabus",         route: "/student/syllabus" },
-    { icon: "🗓️", label: "Time table",      route: "/student/timetable" },
-    { icon: "👨‍🏫", label: "Faculties",      route: "/student/faculties" },
-    { icon: "📝", label: "Exams",            route: "/student/exams" },
-    { icon: "📈", label: "Results",          route: "/student/results" },
-    { icon: "💳", label: "Fees",             route: "/student/fees" },
-    { icon: "✅", label: "Attendance",       route: "/student/attendance" },
-    { icon: "📨", label: "Attend. request",  route: "/student/request" },
-    { icon: "🪪", label: "Download ID-Card", route: "/student/id-card" },
+    { icon: presenterIcon, label: "Today's Lecture",  route: "/student/lecture" },
+    { icon: calendarIcon, label: "Attendance Inc.",  route: "/student/attendance" },
+    { icon: syllabusIcon, label: "Syllabus",         route: "/student/syllabus" },
+    { icon: clockIcon, label: "Time table",      route: "/student/timetable" },
+    { icon: teacherIcon, label: "Faculties",      route: "/student/faculties" },
+    { icon: examIcon, label: "Exams",            route: "/student/exams" },
+    { icon: markIcon, label: "Results",          route: "/student/results" },
+    { icon: feesIcon, label: "Fees",             route: "/student/fees" },
+    { icon: calendarIcon, label: "Attendance",       route: "/student/attendance" },
+    { icon: receptionistIcon, label: "Attend. request",  route: "/student/request" },
+    { icon: idCardIcon, label: "Download ID-Card", route: "/student/id-card" },
 ];
 
 const ROLL_NAMES = {
@@ -121,7 +131,13 @@ const StudentDashboard = () => {
                         className="sd-card"
                         onClick={() => navigate(item.route)}
                     >
-                        <span className="sd-card-icon">{item.icon}</span>
+                        <span className="sd-card-icon">
+                            {typeof item.icon === "string" && item.icon.length <= 2 ? (
+                                item.icon
+                            ) : (
+                                <img src={item.icon} alt={item.label} className="sd-icon-img" />
+                            )}
+                        </span>
                         <span className="sd-card-label">{item.label}</span>
                     </button>
                 ))}

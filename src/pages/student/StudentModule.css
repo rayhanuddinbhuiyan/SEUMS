@@ -1,21 +1,66 @@
 /* ══════════════════════════════════════════════════
-   Shared Student Module Page Styles
+   Shared Student Module Page Styles — Glassmorphism
    Used by: TodaysLecture, Attendance, Syllabus,
             Timetable, Faculties, Exams, Results,
             Fees, AttendRequest
-══════════════════════════════════════════════════ */
+ ══════════════════════════════════════════════════ */
 
 .smp-page {
     min-height: 100vh;
-    background: #f0f2f8;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
     display: flex;
     flex-direction: column;
     font-family: 'Segoe UI', Arial, sans-serif;
+    position: relative;
+    overflow-x: hidden;
+    color: #fff;
+}
+
+/* Glowing background orbs */
+.smp-page::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0) 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    animation: float 10s ease-in-out infinite alternate;
+}
+
+.smp-page::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    right: -10%;
+    width: 35vw;
+    height: 35vw;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, rgba(236, 72, 153, 0) 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    animation: float 12s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(20px) scale(1.1); }
+}
+
+/* Z-index positioning for content panels */
+.smp-topbar, .smp-content {
+    position: relative;
+    z-index: 10;
 }
 
 /* ── Top Bar ──────────────────────────────────── */
 .smp-topbar {
-    background: #1a2e5a;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     display: flex;
     align-items: center;
     gap: 14px;
@@ -23,23 +68,27 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .smp-back-btn {
-    background: rgba(255,255,255,0.15);
-    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: #fff;
-    width: 34px; height: 34px;
+    width: 36px; height: 36px;
     border-radius: 50%;
     font-size: 18px;
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
-    transition: background 0.18s;
+    transition: all 0.2s;
     line-height: 1;
 }
-.smp-back-btn:hover { background: rgba(255,255,255,0.28); }
+.smp-back-btn:hover { 
+    background: rgba(255, 255, 255, 0.2); 
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateX(-2px);
+}
 
 .smp-topbar-title { flex: 1; }
 .smp-topbar-title h1 {
@@ -51,7 +100,7 @@
 }
 .smp-topbar-title p {
     font-size: clamp(10px, 1vw, 12px);
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
     margin: 0;
 }
 
@@ -75,15 +124,19 @@
 
 /* ── Section card ─────────────────────────────── */
 .smp-card {
-    background: #fff;
-    border-radius: 14px;
-    box-shadow: 0 2px 10px rgba(26,46,90,0.07);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
     overflow: hidden;
 }
 
 .smp-card-header {
-    background: linear-gradient(135deg, #1a2e5a, #243f7a);
-    padding: 14px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 20px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -105,45 +158,47 @@
     width: 100%;
     border-collapse: collapse;
     font-size: clamp(12px, 1.1vw, 14px);
+    color: #fff;
 }
 .smp-table th {
-    background: #f5f7fc;
-    color: #1a2e5a;
+    background: rgba(255, 255, 255, 0.06);
+    color: #a78bfa;
     font-weight: 700;
-    padding: 11px 16px;
+    padding: 12px 16px;
     text-align: left;
     font-size: clamp(11px, 1vw, 12px);
     text-transform: uppercase;
     letter-spacing: 0.4px;
-    border-bottom: 2px solid #e8ecf4;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 .smp-table td {
-    padding: 12px 16px;
-    color: #2d3748;
-    border-bottom: 1px solid #f0f2f8;
+    padding: 14px 16px;
+    color: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     vertical-align: middle;
 }
 .smp-table tr:last-child td { border-bottom: none; }
-.smp-table tr:hover td { background: #f8f9fd; }
+.smp-table tr:hover td { background: rgba(255, 255, 255, 0.04); }
 
 /* ── Status badges ────────────────────────────── */
 .badge {
     display: inline-block;
-    padding: 3px 10px;
+    padding: 4px 12px;
     border-radius: 20px;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.3px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-.badge-green  { background: #c6f6d5; color: #276749; }
-.badge-red    { background: #fed7d7; color: #9b2c2c; }
-.badge-yellow { background: #fefcbf; color: #744210; }
-.badge-blue   { background: #bee3f8; color: #2c5282; }
-.badge-gray   { background: #e2e8f0; color: #4a5568; }
+.badge-green  { background: rgba(56, 161, 105, 0.25); color: #86efac; border: 1px solid rgba(56, 161, 105, 0.4); }
+.badge-red    { background: rgba(229, 62, 62, 0.25); color: #feb2b2; border: 1px solid rgba(229, 62, 62, 0.4); }
+.badge-yellow { background: rgba(214, 158, 46, 0.25); color: #fbd38d; border: 1px solid rgba(214, 158, 46, 0.4); }
+.badge-blue   { background: rgba(49, 130, 206, 0.25); color: #90cdf4; border: 1px solid rgba(49, 130, 206, 0.4); }
+.badge-gray   { background: rgba(113, 128, 150, 0.25); color: #e2e8f0; border: 1px solid rgba(113, 128, 150, 0.4); }
 
 /* ── Progress bar ─────────────────────────────── */
 .smp-progress-wrap {
-    background: #e8ecf4;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     height: 8px;
     overflow: hidden;
@@ -154,128 +209,162 @@
     border-radius: 20px;
     transition: width 0.4s ease;
 }
-.smp-progress-bar.good   { background: #38a169; }
-.smp-progress-bar.warn   { background: #e9a020; }
-.smp-progress-bar.danger { background: #e53e3e; }
+.smp-progress-bar.good   { background: #38a169; box-shadow: 0 0 10px rgba(56, 161, 105, 0.5); }
+.smp-progress-bar.warn   { background: #e9a020; box-shadow: 0 0 10px rgba(233, 160, 32, 0.5); }
+.smp-progress-bar.danger { background: #e53e3e; box-shadow: 0 0 10px rgba(229, 62, 62, 0.5); }
 
 /* ── Summary stats row ────────────────────────── */
 .smp-stats-row {
     display: flex;
-    gap: 12px;
+    gap: 16px;
     flex-wrap: wrap;
 }
 .smp-stat-box {
     flex: 1;
-    min-width: 110px;
-    background: #fff;
-    border-radius: 12px;
-    padding: 16px;
-    box-shadow: 0 2px 8px rgba(26,46,90,0.07);
+    min-width: 120px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px 16px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 .smp-stat-box .stat-val {
-    font-size: clamp(22px, 3vw, 28px);
+    font-size: clamp(24px, 3.5vw, 32px);
     font-weight: 800;
-    color: #1a2e5a;
+    color: #fff;
     line-height: 1;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 .smp-stat-box .stat-label {
     font-size: clamp(10px, 0.9vw, 11px);
-    color: #888;
-    font-weight: 600;
+    color: #a78bfa;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.5px;
 }
 
 /* ── Form ─────────────────────────────────────── */
-.smp-form { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
-.smp-form label { font-size: 12px; font-weight: 700; color: #1a2e5a; text-transform: uppercase; letter-spacing: 0.4px; display: block; margin-bottom: 5px; }
+.smp-form { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.smp-form label { font-size: 11px; font-weight: 700; color: rgba(255, 255, 255, 0.9); text-transform: uppercase; letter-spacing: 0.6px; display: block; margin-bottom: 6px; }
 .smp-form select,
 .smp-form textarea,
 .smp-form input[type="text"] {
     width: 100%; box-sizing: border-box;
-    border: 1.5px solid #dde3ef; border-radius: 10px;
-    padding: 10px 14px; font-size: 14px; color: #1a2e5a;
-    font-family: inherit; background: #fff; outline: none;
-    transition: border-color 0.18s, box-shadow 0.18s;
+    border: 1.5px solid rgba(255, 255, 255, 0.15); border-radius: 12px;
+    padding: 12px 14px; font-size: 14px; color: #fff;
+    font-family: inherit; background: rgba(255, 255, 255, 0.05); outline: none;
+    transition: all 0.25s ease;
+}
+.smp-form select option {
+    background: #1e1b4b;
+    color: #fff;
 }
 .smp-form select:focus,
 .smp-form textarea:focus,
 .smp-form input[type="text"]:focus {
-    border-color: #1a2e5a;
-    box-shadow: 0 0 0 3px rgba(26,46,90,0.10);
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.10);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
 }
-.smp-form textarea { min-height: 90px; resize: vertical; }
+.smp-form textarea { min-height: 100px; resize: vertical; }
 .smp-submit-btn {
-    background: linear-gradient(135deg, #1a2e5a, #243f7a);
-    color: #fff; border: none; border-radius: 10px;
-    padding: 12px; font-size: 14px; font-weight: 700;
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    color: #fff; border: none; border-radius: 12px;
+    padding: 14px; font-size: 14px; font-weight: 700;
     cursor: pointer; font-family: inherit;
-    transition: opacity 0.18s, transform 0.15s;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
 }
-.smp-submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.smp-submit-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5); }
+.smp-submit-btn:active { transform: scale(0.98); }
 
 /* ── Faculty card grid ────────────────────────── */
 .smp-faculty-grid {
-    padding: 16px;
+    padding: 20px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 14px;
+    gap: 16px;
 }
 .smp-faculty-card {
-    background: #f5f7fc;
-    border-radius: 12px;
-    padding: 18px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 20px 16px;
     text-align: center;
-    border: 1px solid #e4eaf5;
-    transition: transform 0.15s, box-shadow 0.15s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s;
 }
-.smp-faculty-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(26,46,90,0.10); }
+.smp-faculty-card:hover { 
+    transform: translateY(-4px); 
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25); 
+}
 .smp-faculty-avatar {
-    width: 52px; height: 52px; border-radius: 50%;
-    background: #dde3ef; display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 12px; font-size: 22px;
-    border: 2px solid #c8d4ea;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 12px; font-size: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
-.smp-faculty-name { font-size: 14px; font-weight: 700; color: #1a2e5a; margin-bottom: 4px; }
-.smp-faculty-role { font-size: 11px; color: #5a6e8a; margin-bottom: 6px; font-weight: 500; }
-.smp-faculty-dept { font-size: 11px; color: #888; }
-.smp-faculty-email { font-size: 11px; color: #3182ce; margin-top: 6px; word-break: break-all; }
+.smp-faculty-name { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.smp-faculty-role { font-size: 11px; color: rgba(255, 255, 255, 0.6); margin-bottom: 6px; font-weight: 500; }
+.smp-faculty-dept { font-size: 11px; color: #a78bfa; font-weight: 600; }
+.smp-faculty-email { font-size: 11px; color: #a78bfa; margin-top: 8px; word-break: break-all; text-decoration: none; display: inline-block; }
+.smp-faculty-email:hover { text-decoration: underline; }
 
 /* ── Timetable grid ───────────────────────────── */
-.smp-timetable { padding: 16px; overflow-x: auto; }
+.smp-timetable { padding: 20px; overflow-x: auto; }
 .smp-tt-grid {
     display: grid;
-    grid-template-columns: 80px repeat(5, 1fr);
-    gap: 6px;
-    min-width: 560px;
+    grid-template-columns: 90px repeat(5, 1fr);
+    gap: 8px;
+    min-width: 600px;
 }
 .smp-tt-cell {
-    background: #f5f7fc;
-    border-radius: 8px;
-    padding: 10px 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 12px 10px;
     text-align: center;
     font-size: clamp(10px, 1vw, 12px);
+    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .smp-tt-cell.header {
-    background: #1a2e5a;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     color: #fff;
     font-weight: 700;
     font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.5px;
 }
-.smp-tt-cell.time-col { background: #e4eaf5; color: #1a2e5a; font-weight: 700; font-size: 10px; }
-.smp-tt-cell.has-class { background: #eef1fb; border: 1px solid #c8d4ea; }
-.smp-tt-subject { font-weight: 700; color: #1a2e5a; margin-bottom: 3px; }
-.smp-tt-room { font-size: 10px; color: #888; }
+.smp-tt-cell.time-col { 
+    background: rgba(255, 255, 255, 0.07); 
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #a78bfa; 
+    font-weight: 700; 
+    font-size: 10px; 
+}
+.smp-tt-cell.has-class { 
+    background: rgba(99, 102, 241, 0.1); 
+    border: 1px solid rgba(99, 102, 241, 0.35); 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.smp-tt-subject { font-weight: 700; color: #fff; margin-bottom: 4px; }
+.smp-tt-room { font-size: 10px; color: rgba(255, 255, 255, 0.5); }
 
 /* ── Empty state ──────────────────────────────── */
 .smp-empty {
-    padding: 40px;
+    padding: 50px;
     text-align: center;
-    color: #aaa;
+    color: rgba(255, 255, 255, 0.4);
     font-size: 14px;
 }
 
