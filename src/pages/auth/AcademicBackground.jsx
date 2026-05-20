@@ -32,7 +32,7 @@ export default function AcademicBackground() {
 
         const initAcademicItems = () => {
             academicItems = [];
-            const count = Math.max(8, Math.floor((canvas.width * canvas.height) / 75000));
+            const count = 5;
             
             for (let i = 0; i < count; i++) {
                 const type = types[i % types.length];

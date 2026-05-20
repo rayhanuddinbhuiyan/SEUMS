@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import seuLogo from "../../assets/icons/SEU_LOGO.png";
-import GalaxyBackground from "./GalaxyBackground";
+import AcademicBackground from "./AcademicBackground";
 import "./Register.css";
 
 const ROLES = ["Student", "Teacher", "Coordinator", "Admin"];
@@ -9,6 +8,7 @@ const DEPARTMENTS = ["CSE", "EEE", "BBA", "English", "Law", "Pharmacy", "Civil E
 
 const Register = () => {
     const navigate = useNavigate();
+
     const [form, setForm] = useState({
         fullName: "", email: "", enrollment: "",
         role: "Student", department: "CSE", password: "", confirmPassword: "",
@@ -107,11 +107,76 @@ const Register = () => {
 
     return (
         <div className="reg-page">
-            <GalaxyBackground />
+            <AcademicBackground />
+            <div className="campus-page-bg">
+                <svg viewBox="0 0 200 60" className="campus-vector campus-vector-bg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="10" y1="50" x2="190" y2="50" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1.5" />
+                    <g className="campus-vector-building">
+                        <line x1="85" y1="9" x2="85" y2="15" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="0.8" />
+                        <line x1="115" y1="9" x2="115" y2="15" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="0.8" />
+                        <rect x="58" y="0" width="84" height="9" rx="1.5" fill="rgba(15, 23, 42, 0.9)" stroke="rgba(14, 165, 233, 0.4)" strokeWidth="0.75" className="campus-signboard-rect" />
+                        <text x="100" y="6.5" fill="#38bdf8" fontSize="4.6" fontWeight="800" fontFamily="'Outfit', 'Inter', sans-serif" textAnchor="middle" letterSpacing="0.2" className="campus-signboard-text">SOUTHEAST UNIVERSITY</text>
+                        <rect x="65" y="48" width="70" height="2" fill="rgba(255, 255, 255, 0.4)" />
+                        <rect x="70" y="46" width="60" height="2" fill="rgba(255, 255, 255, 0.4)" />
+                        <rect x="75" y="26" width="4" height="20" fill="rgba(255, 255, 255, 0.3)" />
+                        <rect x="85" y="26" width="4" height="20" fill="rgba(255, 255, 255, 0.3)" />
+                        <rect x="95" y="26" width="4" height="20" fill="rgba(255, 255, 255, 0.3)" />
+                        <rect x="105" y="26" width="4" height="20" fill="rgba(255, 255, 255, 0.3)" />
+                        <rect x="115" y="26" width="4" height="20" fill="rgba(255, 255, 255, 0.3)" />
+                        <rect x="125" y="26" width="4" height="20" fill="rgba(255, 255, 255, 0.3)" />
+                        <rect x="72" y="22" width="56" height="4" fill="rgba(255, 255, 255, 0.4)" />
+                        <polygon points="72,22 100,8 128,22" fill="rgba(255, 255, 255, 0.15)" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="1" />
+                        <circle cx="100" cy="16" r="2.5" fill="rgba(255, 255, 255, 0.6)" />
+                        <path d="M40,48 L40,32 L72,32 L72,48 Z" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1" />
+                        <path d="M128,48 L128,32 L160,32 L160,48 Z" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1" />
+                        <rect x="46" y="36" width="5" height="8" rx="1" fill="rgba(255, 255, 255, 0.2)" />
+                        <rect x="56" y="36" width="5" height="8" rx="1" fill="rgba(255, 255, 255, 0.2)" />
+                        <rect x="139" y="36" width="5" height="8" rx="1" fill="rgba(255, 255, 255, 0.2)" />
+                        <rect x="149" y="36" width="5" height="8" rx="1" fill="rgba(255, 255, 255, 0.2)" />
+                    </g>
+                    <path d="M 22 48 L 22 40" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="1.5" />
+                    <circle cx="22" cy="35" r="7" fill="rgba(167, 139, 250, 0.15)" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="1" />
+                    <circle cx="18" cy="33" r="4" fill="rgba(167, 139, 250, 0.1)" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.8" />
+                    <path d="M 178 48 L 178 40" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="1.5" />
+                    <circle cx="178" cy="35" r="7" fill="rgba(167, 139, 250, 0.15)" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="1" />
+                    <circle cx="182" cy="33" r="4" fill="rgba(167, 139, 250, 0.1)" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.8" />
+                </svg>
+            </div>
             <div className="glass-card-wide">
                 <div className="reg-brand">
-                    <div className="reg-logo">
-                        <img src={seuLogo} alt="SEU Logo" />
+                    <div className="campus-divider-section">
+                        <svg viewBox="0 0 200 60" className="campus-vector" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <line x1="10" y1="50" x2="190" y2="50" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1.5" />
+                            <g className="campus-vector-building">
+                                <line x1="85" y1="9" x2="85" y2="15" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="0.8" />
+                                <line x1="115" y1="9" x2="115" y2="15" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="0.8" />
+                                <rect x="58" y="0" width="84" height="9" rx="1.5" fill="rgba(15, 23, 42, 0.9)" stroke="rgba(14, 165, 233, 0.4)" strokeWidth="0.75" className="campus-signboard-rect" />
+                                <text x="100" y="6.5" fill="#38bdf8" fontSize="4.6" fontWeight="800" fontFamily="'Outfit', 'Inter', sans-serif" textAnchor="middle" letterSpacing="0.2" className="campus-signboard-text">SOUTHEAST UNIVERSITY</text>
+                                <rect x="65" y="48" width="70" height="2" fill="rgba(255, 255, 255, 0.4)" />
+                                <rect x="70" y="46" width="60" height="2" fill="rgba(255, 255, 255, 0.4)" />
+                                <rect x="75" y="26" width="4" height="20" fill="rgba(255, 255, 255, 0.3)" />
+                                <rect x="85" y="26" width="4" height="20" fill="rgba(255, 255, 255, 0.3)" />
+                                <rect x="95" y="26" width="4" height="20" fill="rgba(255, 255, 255, 0.3)" />
+                                <rect x="105" y="26" width="4" height="20" fill="rgba(255, 255, 255, 0.3)" />
+                                <rect x="115" y="26" width="4" height="20" fill="rgba(255, 255, 255, 0.3)" />
+                                <rect x="125" y="26" width="4" height="20" fill="rgba(255, 255, 255, 0.3)" />
+                                <rect x="72" y="22" width="56" height="4" fill="rgba(255, 255, 255, 0.4)" />
+                                <polygon points="72,22 100,8 128,22" fill="rgba(255, 255, 255, 0.15)" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="1" />
+                                <circle cx="100" cy="16" r="2.5" fill="rgba(255, 255, 255, 0.6)" />
+                                <path d="M40,48 L40,32 L72,32 L72,48 Z" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1" />
+                                <path d="M128,48 L128,32 L160,32 L160,48 Z" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1" />
+                                <rect x="46" y="36" width="5" height="8" rx="1" fill="rgba(255, 255, 255, 0.2)" />
+                                <rect x="56" y="36" width="5" height="8" rx="1" fill="rgba(255, 255, 255, 0.2)" />
+                                <rect x="139" y="36" width="5" height="8" rx="1" fill="rgba(255, 255, 255, 0.2)" />
+                                <rect x="149" y="36" width="5" height="8" rx="1" fill="rgba(255, 255, 255, 0.2)" />
+                            </g>
+                            <path d="M 22 48 L 22 40" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="1.5" />
+                            <circle cx="22" cy="35" r="7" fill="rgba(167, 139, 250, 0.15)" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="1" />
+                            <circle cx="18" cy="33" r="4" fill="rgba(167, 139, 250, 0.1)" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.8" />
+                            <path d="M 178 48 L 178 40" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="1.5" />
+                            <circle cx="178" cy="35" r="7" fill="rgba(167, 139, 250, 0.15)" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="1" />
+                            <circle cx="182" cy="33" r="4" fill="rgba(167, 139, 250, 0.1)" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="0.8" />
+                        </svg>
                     </div>
                     <h2>Create Account</h2>
                     <p className="tagline">Fill in your details to register</p>
