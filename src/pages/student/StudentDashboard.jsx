@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import presenterIcon from "../../assets/icons/presenter.png";
 import calendarIcon from "../../assets/icons/calendar.png";
@@ -81,11 +81,36 @@ const getStudentInfo = (user = {}) => {
     };
 };
 
+const formatDate = (isoString) => {
+    try {
+        const diff = Date.now() - new Date(isoString).getTime();
+        const mins = Math.floor(diff / 60000);
+        if (mins < 60) return mins <= 1 ? "Just now" : `${mins} mins ago`;
+        const hours = Math.floor(mins / 60);
+        if (hours < 24) return `${hours} hours ago`;
+        const days = Math.floor(hours / 24);
+        if (days === 1) return "Yesterday";
+        return new Date(isoString).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    } catch {
+        return "Recent";
+    }
+};
+
 const StudentDashboard = () => {
     const navigate = useNavigate();
     // Read session from localStorage (persists on refresh)
     const raw = JSON.parse(localStorage.getItem("seu_current_user") || "{}");
     const student = getStudentInfo(raw);
+
+    const [announcements, setAnnouncements] = useState([]);
+    const [selectedAnn, setSelectedAnn] = useState(null);
+
+    useEffect(() => {
+        const stored = JSON.parse(localStorage.getItem("seu_announcements") || "[]");
+        // Sort by date descending
+        const sorted = stored.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setAnnouncements(sorted);
+    }, []);
 
     const handleLogout = () => {
         localStorage.removeItem("seu_current_user");
@@ -107,7 +132,11 @@ const StudentDashboard = () => {
                     </div>
                     <span className="sd-campus">Southeast University</span>
                 </div>
-                <button className="sd-bell" title="Notifications">🔔</button>
+                <button className="sd-bell" title="Notifications" onClick={() => {
+                    if (announcements.length > 0) {
+                        setSelectedAnn(announcements[0]);
+                    }
+                }}>🔔</button>
             </div>
 
             {/* ── Student Info Strip ───────────────────── */}
@@ -122,6 +151,36 @@ const StudentDashboard = () => {
                     <span><strong>Roll No.</strong><br />{student.rollNo}</span>
                 </div>
             </div>
+
+            {/* ── Announcements Widget ─────────────────── */}
+            {announcements.length > 0 && (
+                <div className="sd-announcements-widget">
+                    <div className="sd-ann-header">
+                        <h3>📢 Recent Announcements</h3>
+                        <span className="sd-ann-pulse"></span>
+                    </div>
+                    <div className="sd-ann-list">
+                        {announcements.map((ann) => {
+                            const isImportant = ann.tag === "Exam" || ann.tag === "Assignment";
+                            return (
+                                <div 
+                                    key={ann.id} 
+                                    className={`sd-ann-item ${isImportant ? "important" : ""}`}
+                                    onClick={() => setSelectedAnn(ann)}
+                                >
+                                    <div className="sd-ann-item-meta">
+                                        <span className={`sd-ann-tag tag-${ann.tag.toLowerCase()}`}>{ann.tag}</span>
+                                        <span className="sd-ann-course">{ann.courseCode}</span>
+                                        <span className="sd-ann-date">{formatDate(ann.date)}</span>
+                                    </div>
+                                    <p className="sd-ann-title">{ann.title}</p>
+                                    <p className="sd-ann-preview">{ann.content}</p>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            )}
 
             {/* ── Feature Grid ─────────────────────────── */}
             <div className="sd-grid">
@@ -142,6 +201,37 @@ const StudentDashboard = () => {
                     </button>
                 ))}
             </div>
+
+            {/* ── Announcement Detail Modal ────────────── */}
+            {selectedAnn && (
+                <div className="sd-modal-backdrop" onClick={() => setSelectedAnn(null)}>
+                    <div className="sd-modal-content" onClick={(e) => e.stopPropagation()}>
+                        <button className="sd-modal-close" onClick={() => setSelectedAnn(null)}>✕</button>
+                        <div className="sd-modal-header">
+                            <span className={`sd-modal-tag tag-${selectedAnn.tag.toLowerCase()}`}>{selectedAnn.tag}</span>
+                            <span className="sd-modal-course">{selectedAnn.courseCode} • {selectedAnn.courseName}</span>
+                        </div>
+                        <h2 className="sd-modal-title">{selectedAnn.title}</h2>
+                        <div className="sd-modal-author">
+                            <span className="sd-author-icon">👤</span>
+                            <div>
+                                <p className="sd-author-name">{selectedAnn.postedBy}</p>
+                                <p className="sd-author-date">{new Date(selectedAnn.date).toLocaleString("en-US", { 
+                                    weekday: 'long', 
+                                    year: 'numeric', 
+                                    month: 'long', 
+                                    day: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit'
+                                })}</p>
+                            </div>
+                        </div>
+                        <div className="sd-modal-body">
+                            <p>{selectedAnn.content}</p>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* ── Footer ───────────────────────────────── */}
             <div className="sd-footer">

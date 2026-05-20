@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import seuLogo from "../../assets/icons/SEU_____________________________logo.png";
+import seuLogo from "../../assets/icons/SEU_LOGO.png";
 import GalaxyBackground from "./GalaxyBackground";
 import "./Login.css";
 
@@ -19,6 +19,100 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
     const [error, setError] = useState("");
+
+    useEffect(() => {
+        // Seed default materials if empty
+        if (!localStorage.getItem("seu_materials")) {
+            const defaultMaterials = [
+                {
+                    id: "mat-1",
+                    courseCode: "CSE-301",
+                    courseName: "Computer Networks",
+                    title: "Introduction to TCP/IP Protocols",
+                    type: "PDF",
+                    size: "2.4 MB",
+                    date: "2026-05-15T09:00:00.000Z",
+                    description: "Overview of TCP/IP layering model, IP addressing basics, and port routing rules.",
+                    downloadUrl: "#",
+                    teacherName: "Dr. Rayhan Uddin"
+                },
+                {
+                    id: "mat-2",
+                    courseCode: "CSE-301",
+                    courseName: "Computer Networks",
+                    title: "Subnetting & IP Addressing Guide",
+                    type: "Slide",
+                    size: "4.1 MB",
+                    date: "2026-05-18T14:30:00.000Z",
+                    description: "Interactive slides detailing Classless Inter-Domain Routing (CIDR) and Variable Length Subnet Masking (VLSM).",
+                    downloadUrl: "#",
+                    teacherName: "Dr. Rayhan Uddin"
+                },
+                {
+                    id: "mat-3",
+                    courseCode: "CSE-205",
+                    courseName: "Data Structures",
+                    title: "Binary Search Tree Visuals",
+                    type: "Video",
+                    size: "18.5 MB",
+                    date: "2026-05-10T11:00:00.000Z",
+                    description: "Recorded lecture video explaining insertion, deletion, and rotation operations on Binary Search Trees (BST).",
+                    downloadUrl: "#",
+                    teacherName: "Prof. H. Rahman"
+                },
+                {
+                    id: "mat-4",
+                    courseCode: "CSE-303",
+                    courseName: "Database Systems",
+                    title: "SQL Query Exercises & Solutions",
+                    type: "Zip",
+                    size: "1.2 MB",
+                    date: "2026-05-12T10:15:00.000Z",
+                    description: "Lab sheet containing complex SQL queries, JOIN operations, subqueries, and their sample relational model tables.",
+                    downloadUrl: "#",
+                    teacherName: "Faculty Member"
+                }
+            ];
+            localStorage.setItem("seu_materials", JSON.stringify(defaultMaterials));
+        }
+
+        // Seed default announcements if empty
+        if (!localStorage.getItem("seu_announcements")) {
+            const defaultAnnouncements = [
+                {
+                    id: "ann-1",
+                    courseCode: "CSE-301",
+                    courseName: "Computer Networks",
+                    title: "Mid-Term Exam Syllabus Update",
+                    content: "The mid-term exam will cover Chapters 1 to 4. Please study VLSM and subnetting calculation exercises deeply. The exam is scheduled for next Monday at Room 402.",
+                    tag: "Exam",
+                    date: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago
+                    postedBy: "Dr. Rayhan Uddin"
+                },
+                {
+                    id: "ann-2",
+                    courseCode: "CSE-205",
+                    courseName: "Data Structures",
+                    title: "Assignment 2 Submission Deadline",
+                    content: "Please submit your AVL Tree implementation by Friday midnight. Make sure to upload both the code files (.cpp/.java) and a brief design report in PDF format.",
+                    tag: "Assignment",
+                    date: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(), // Yesterday
+                    postedBy: "Prof. H. Rahman"
+                },
+                {
+                    id: "ann-3",
+                    courseCode: "General",
+                    courseName: "All Departments",
+                    title: "Southeast University Cultural Fest 2026",
+                    content: "Join us for the annual SEU Cultural Fest starting this Thursday at the Main Campus Auditorium. Features include student performances, technical project showcases, and food stalls!",
+                    tag: "General",
+                    date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days ago
+                    postedBy: "Admin Office"
+                }
+            ];
+            localStorage.setItem("seu_announcements", JSON.stringify(defaultAnnouncements));
+        }
+    }, []);
 
     const handleLogin = (e) => {
         e.preventDefault();

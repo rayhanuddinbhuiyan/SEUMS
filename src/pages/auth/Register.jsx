@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import seuLogo from "../../assets/icons/SEU_____________________________logo.png";
+import seuLogo from "../../assets/icons/SEU_LOGO.png";
 import GalaxyBackground from "./GalaxyBackground";
 import "./Register.css";
 
